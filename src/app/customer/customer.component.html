@@ -1,0 +1,218 @@
+<form class="form-horizontal">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group form-inline">
+        <label for="name">Customer Name</label>
+        <input
+          type="text"
+          [(ngModel)]="customerModel!.name"
+          class="form-control"
+          name="name"
+          #name="ngModel"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="!name.valid && name.touched">
+          name is required
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group form-inline">
+        <label for="class">Class</label>
+        <input
+          type="text"
+          [(ngModel)]="customerModel!.class"
+          class="form-control"
+          name="class"
+          #class="ngModel"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="!class.valid && class.touched">
+          class is required
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input
+          type="number"
+          [(ngModel)]="customerModel!.phone"
+          class="form-control"
+          id="phone"
+          name="phone"
+        />
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          [(ngModel)]="customerModel!.email"
+          class="form-control"
+          id="email"
+          name="email"
+          #email="ngModel"
+          email
+        />
+        <div class="alert alert-danger" *ngIf="!email.valid">
+          email is not in a correct format
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <input
+          type="text"
+          [(ngModel)]="customerModel!.comment"
+          class="form-control"
+          id="comment"
+          name="comment"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: row-reverse">
+    <button
+      [disabled]="canSave"
+      class="btn btn-primary"
+      style="margin: 10px 0 0 0"
+      (click)="update()"
+    >
+      Update
+    </button>
+
+    <button
+      [disabled]="!canSave"
+      class="btn btn-primary"
+      style="margin: 10px 10px 0 10px"
+      (click)="save()"
+    >
+      Save
+    </button>
+
+    <button
+      class="btn btn-primary"
+      style="margin: 10px 0 0 0px"
+      (click)="clear()"
+    >
+      Clear
+    </button>
+  </div>
+</form>
+
+<div class="tableDiv">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8"
+  >
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by id"
+      >
+        ID
+      </th>
+      <td mat-cell class="id" *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by name"
+      >
+        Customer Name (A-Z)
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <!-- class Column -->
+    <ng-container matColumnDef="class">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by class"
+      >
+        Class
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.class }}</td>
+    </ng-container>
+
+    <!-- email Column -->
+    <ng-container matColumnDef="email">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by email"
+      >
+        Email
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <!-- phone Column -->
+    <ng-container matColumnDef="phone">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by phone"
+      >
+        Phone
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+    </ng-container>
+
+    <!-- comment Column -->
+    <ng-container matColumnDef="comment">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by comment"
+      >
+        Comment
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.comment }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selectRow(row)"
+    ></tr>
+  </table>
+</div>
+
+<div style="display: flex; flex-direction: row-reverse">
+  <button
+    [disabled]="canSave"
+    class="btn btn-primary"
+    style="margin: 10px 0 0 0px; background-color: #ff6600; opacity: unset"
+    (click)="delete()"
+  >
+    Delete
+  </button>
+</div>

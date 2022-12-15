@@ -1,0 +1,49 @@
+  .info-row span:first-child {
+    font-weight: bold;
+  }
+
+  table.mat-table {
+    width: -webkit-fill-available;
+    overflow-wrap:anywhere;
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .tableDiv{
+    margin-top: 20px;
+    border: 1px solid #6daf42;
+  }
+
+th,td.id{
+  background-color: #6daf42;
+  color: white;
+}
+
+th,td{
+  border: 1px solid black;
+  font-size: medium;
+}
+
+
+td.cdk-cell:not(.id){
+  background-color: #c4deaa;
+}
+
+::ng-deep .mat-cell{
+  padding-left: 10px !important; 
+}
+
+::ng-deep .mat-sort-header-content {
+    width: max-content;
+}
+
+::ng-deep .mat-header-cell{
+  padding-left: 10px !important;
+}
+
+// @media screen and (max-width: 700px) {
+//   .mat-row,.mat-header-row{
+//     display: table;
+//     width: -webkit-fill-available;
+//   }
+// }

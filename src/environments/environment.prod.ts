@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  ITS_TechnicalAssignmentApiUrl: 'https://localhost:7166/api/Customer',
 };
